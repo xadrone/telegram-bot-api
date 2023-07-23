@@ -1,3 +1,4 @@
+'use strict';
 const fetch = require('node-fetch');
 const botData = require('../bot-settings.json');
 

@@ -1,4 +1,5 @@
-/bot-settings.json
-/node_modules
-/package-lock.json
-/index.js
+bot-settings.json
+node_modules
+package-lock.json
+index.js
+examp.json

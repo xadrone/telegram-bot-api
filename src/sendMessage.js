@@ -1,9 +1,10 @@
+'use strict';
 const fetch = require('node-fetch');
 const botData = require('../bot-settings.json');
 
-function sendMessage(textMessage) {
+function sendMessage(textMessage, chatId) {
   const queryData = {
-    chat_id: botData.chat_id,
+    chat_id: chatId,
     text: textMessage,
   };
   return new Promise((resolve, reject) => {
