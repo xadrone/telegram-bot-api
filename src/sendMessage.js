@@ -2,7 +2,7 @@
 const fetch = require('node-fetch');
 const botData = require('../bot-settings.json');
 
-function sendMessage(textMessage, chatId) {
+function sendMessage(textMessage, chatId, keyboard) {
   const queryData = {
     chat_id: chatId,
     text: textMessage,
@@ -13,7 +13,10 @@ function sendMessage(textMessage, chatId) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(queryData),
+      body:
+        keyboard != undefined
+          ? JSON.stringify(Object.assign(queryData, { reply_markup: keyboard }))
+          : JSON.stringify(queryData),
     })
       .then(async (res) => {
         res

@@ -21,8 +21,8 @@ class Bot extends Emitter {
   getMe() {
     return getMe();
   }
-  sendMessage(text, chatId) {
-    return sendMessage(text, chatId);
+  sendMessage(text, chatId, keyboard) {
+    return sendMessage(text, chatId, keyboard);
   }
   listen() {
     getUpdates(this.offset).then((msgData) => {
