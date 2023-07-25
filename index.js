@@ -21,7 +21,6 @@ function main() {
   });
 
   bot.on('callback_query', (data, id) => {
-    //не работает функция при колбэке
     switch (data) {
       case '1':
         bot.answerCallbackQuery(id).then((res) => {
@@ -36,6 +35,15 @@ function main() {
         });
         break;
     }
+  });
+
+  bot.on('photo', (photoID, chatID) => {
+    bot.sendMessage(`File ID: ${photoID}`, chatID).then((res) => {
+      console.log(res);
+    });
+    bot.sendPhoto(chatID, photoID).then((res) => {
+      console.log(res);
+    });
   });
   setInterval(() => bot.listen(), 2000);
 }

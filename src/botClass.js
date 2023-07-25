@@ -4,6 +4,7 @@ const { getMe } = require('./getMe.js');
 const { sendMessage } = require('./sendMessage.js');
 const { getUpdates } = require('./getUpdates.js');
 const { answerCallbackQuery } = require('./answerCallbackQuery.js');
+const { sendPhoto } = require('./sendPhoto.js');
 const botData = require('../bot-settings.json');
 
 function maxMsgId(msgData) {
@@ -29,6 +30,9 @@ class Bot extends Emitter {
   answerCallbackQuery(query_id, textMsg, func) {
     return answerCallbackQuery(query_id, textMsg, func);
   }
+  sendPhoto(chatID, photoID) {
+    return sendPhoto(chatID, photoID);
+  }
   listen() {
     getUpdates(this.offset).then((msgData) => {
       if (msgData && msgData.ok) {
@@ -44,6 +48,12 @@ class Bot extends Emitter {
               msg.message.entities[0].type == 'bot_command'
             )
               this.emit('cmd', msg.message.chat.id, msg.message.text);
+            else if (msg.message.photo)
+              this.emit(
+                'photo',
+                msg.message.photo.at(-1).file_id,
+                msg.message.chat.id
+              );
             else this.emit('msg', msg.message.chat.id, msg.message.text);
           } else if (msg.callback_query) {
             this.emit(
